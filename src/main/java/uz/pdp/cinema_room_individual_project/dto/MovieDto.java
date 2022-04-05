@@ -22,7 +22,7 @@ public class MovieDto {
     private Integer durationInMin;
     private Double ticketInitPrice;
     private String trailVideoUrl;
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private UUID distributorId;
     private List<UUID> castsIds;
     private List<UUID> genresIds;

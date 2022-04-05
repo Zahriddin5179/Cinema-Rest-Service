@@ -12,10 +12,11 @@ import java.util.UUID;
 
 @Component
 public interface HallRepository extends JpaRepository<Hall,UUID> {
-    @Query(nativeQuery = true,value ="select h.name as name,cast(h.id as varchar)as id from halls h\n" +
-            "join reserved_halls rh on h.id = rh.hall_id\n" +
-            "join movie_schedule ms on rh.afisha_id = ms.id\n" +
+    @Query(nativeQuery = true,value ="select cast(h.id as varchar)as hallId,h.name as hallName from halls h\n" +
+            "join movie_sessions rh on h.id = rh.hall_id\n" +
+            "join movie_announcements ms on rh.movie_announcements_id = ms.id\n" +
             "join movies m on ms.movie_id = m.id\n" +
             "where m.id=:movieId")
-    List<HallProjection> getHallsByMovieId(UUID movieId);
+    List<HallProjection>getHallsByMovieId(UUID movieId);
+    Hall findByName(String name);
 }

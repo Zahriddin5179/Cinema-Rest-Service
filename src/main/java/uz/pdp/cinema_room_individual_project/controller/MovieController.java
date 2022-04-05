@@ -19,6 +19,8 @@ import static uz.pdp.cinema_room_individual_project.utils.Constants.*;
 public class MovieController {
     @Autowired
     MovieServiseImpl movieServise;
+
+    @CrossOrigin
     @GetMapping
     public HttpEntity<?> getAllMovies(@RequestParam(name = "size",defaultValue= DEFAULT_PAGE_SIZE) int size,
                                       @RequestParam(name = "page",defaultValue="1") int page,
@@ -28,9 +30,12 @@ public class MovieController {
                                           ){
        return movieServise.getAllMovies(size, page, search, sort, direction);
     }
+    @GetMapping("/{movieId}")
+    public HttpEntity<?>getAllInfoAboutMovie(@PathVariable(name = "movieId")UUID movieId){
+        return movieServise.getMovieById(movieId);
+    }
     @PostMapping
-    public HttpEntity<?> saveMovie(@RequestPart("json") MovieDto movieDto,
-                                @RequestPart("file")MultipartFile file){
+    public HttpEntity<?> saveMovie(@RequestPart("file")MultipartFile file,@RequestPart("json") MovieDto movieDto){
         return movieServise.saveMovie(file,movieDto);
     }
     @DeleteMapping("/{movieId}")

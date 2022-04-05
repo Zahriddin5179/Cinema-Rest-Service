@@ -8,25 +8,20 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import uz.pdp.cinema_room_individual_project.dto.MovieDto;
-import uz.pdp.cinema_room_individual_project.dto.MovieScheduleDto;
-import uz.pdp.cinema_room_individual_project.interfaces.MovieScheduleService;
-import uz.pdp.cinema_room_individual_project.interfaces.MovieService;
-import uz.pdp.cinema_room_individual_project.model.*;
+import uz.pdp.cinema_room_individual_project.dto.MovieAnnouncementDto;
+import uz.pdp.cinema_room_individual_project.interfaces.MovieAnnouncementService;
 import uz.pdp.cinema_room_individual_project.payload.ApiResponse;
-import uz.pdp.cinema_room_individual_project.projection.MovieProjection;
-import uz.pdp.cinema_room_individual_project.projection.MovieScheduleProjection;
+import uz.pdp.cinema_room_individual_project.projection.MovieAllDetailProjection;
+import uz.pdp.cinema_room_individual_project.projection.MovieAnnouncementProjection;
+import uz.pdp.cinema_room_individual_project.projection.SeatProjection;
 import uz.pdp.cinema_room_individual_project.repository.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class MovieScheduleServiseImpl implements MovieScheduleService {
-        @Autowired
+public class MovieAnnouncementServiseImpl implements MovieAnnouncementService {
+    @Autowired
     MovieRepository movieRepository;
     @Autowired
     AttachmentRepository attachmentRepository;
@@ -39,36 +34,44 @@ public class MovieScheduleServiseImpl implements MovieScheduleService {
     @Autowired
     GenreRepository genreRepository;
     @Autowired
-    MovieScheduleRepository movieScheduleRepository;
-    @Override
-    public HttpEntity getAllMovieSchedules(int size, int page, String search, String sort, boolean direction) {
-                try {
+    MovieAnnouncementsRepository movieAnnouncementRepository;
+    @Autowired
+    SeatRepository seatRepository;
 
+    @Override
+    public HttpEntity<?> getAllMovieAnnouncements(int size, int page, String search, String sort, boolean direction) {
+        try {
             Pageable pageable = PageRequest.of(
-                    page-1,
+                    page - 1,
                     size,
-                    direction ? Sort.Direction.ASC: Sort.Direction.DESC,
+                    direction ? Sort.Direction.ASC : Sort.Direction.DESC,
                     sort
             );
-            Page<MovieScheduleProjection> allMovieSchedules = movieScheduleRepository.getAllMovieSchedules(pageable,search);
-            return ResponseEntity.ok(new ApiResponse("status",true,allMovieSchedules));
-        }catch (Exception e){
-            return ResponseEntity.ok(new ApiResponse("failed",false,null));
+            Page<MovieAnnouncementProjection> allMovieAnnouncements = movieAnnouncementRepository.getAllMovieAnnouncements(pageable, search);
+            return ResponseEntity.ok(new ApiResponse("status", true, allMovieAnnouncements));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ApiResponse("failed", false, null));
         }
     }
 
     @Override
-    public HttpEntity getMovieScheduleById(UUID id) {
+    public HttpEntity<?>getAllAvailableSeats(UUID movieSessionId) {
+        try {
+            List<SeatProjection> allAvailableSeats = seatRepository.getAllAvailableSeats(movieSessionId);
+            return ResponseEntity.ok(new ApiResponse("status", true, allAvailableSeats));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ApiResponse("failed", false, null));
+        }
+    }
+
+    @Override
+    public HttpEntity<?> saveMovieAnnouncement(MovieAnnouncementDto movieAnnouncementDto) {
         return null;
     }
 
     @Override
-    public HttpEntity saveMovieSchedule(MovieScheduleDto movieScheduleDto) {
-        return null;
-    }
-
-    @Override
-    public HttpEntity deleteMovieSchedule(UUID id) {
+    public HttpEntity<?> deleteMovieAnnouncement(UUID id) {
         return null;
     }
 

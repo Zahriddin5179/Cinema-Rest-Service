@@ -15,10 +15,19 @@ import java.util.UUID;
 @Data
 @Entity(name = "seats")
 public class Seat extends AbsEntity {
+
+    private Integer number;
     @ManyToOne
     private Row row;
 
     @ManyToOne
     private PriceCategory priceCategory;
 
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "number=" + number +
+                ", priceCategory=" + priceCategory +
+                '}';
+    }
 }

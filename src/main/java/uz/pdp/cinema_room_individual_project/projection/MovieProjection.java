@@ -6,6 +6,6 @@ import java.util.UUID;
 public interface MovieProjection {
     UUID getId();
     String getTitle();
-    UUID getPosterImgId();
+    UUID getAttachmentId();
     LocalDate getreleaseDate();
 }

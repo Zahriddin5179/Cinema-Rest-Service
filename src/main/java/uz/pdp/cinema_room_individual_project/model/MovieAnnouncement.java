@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "movie_schedule")
-public class MovieSchedule extends AbsEntity {
+@Entity(name = "movie_announcements")
+public class MovieAnnouncement extends AbsEntity {
     @ManyToOne
     private Movie movie;
     private boolean isActive;

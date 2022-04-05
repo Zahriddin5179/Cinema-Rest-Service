@@ -14,11 +14,13 @@ import java.util.UUID;
 
 @Component
 public interface CastRepository extends JpaRepository<Cast,UUID> {
-    @Query(nativeQuery = true,value = "select cast(c.id as varchar) as id,\n" +
-            "       c.full_name  as fullName\n" +
+    @Query(nativeQuery = true,value = "select cast(c.id as varchar) as Id,\n" +
+            "       c.full_name as castFullName,\n" +
+            "       c.cast_type as castType,\n" +
+            "       cast(c.attachment_id as varchar) as castImgId\n" +
             "       from casts c\n" +
             "join movies_casts mc on c.id = mc.casts_id\n" +
             "join movies m on m.id = mc.movies_id\n" +
-            "where m.id = :movieId")
-    List<CastProjection> findByMovieId(UUID movieId);
+            "where m.id=:movieId")
+    List<CastProjection>findByMovieId(UUID movieId);
 }

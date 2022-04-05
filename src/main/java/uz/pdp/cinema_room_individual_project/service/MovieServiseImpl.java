@@ -13,14 +13,12 @@ import uz.pdp.cinema_room_individual_project.dto.MovieDto;
 import uz.pdp.cinema_room_individual_project.interfaces.MovieService;
 import uz.pdp.cinema_room_individual_project.model.*;
 import uz.pdp.cinema_room_individual_project.payload.ApiResponse;
+import uz.pdp.cinema_room_individual_project.projection.MovieAllDetailProjection;
 import uz.pdp.cinema_room_individual_project.projection.MovieProjection;
 import uz.pdp.cinema_room_individual_project.repository.*;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class MovieServiseImpl implements MovieService {
@@ -49,7 +47,7 @@ public class MovieServiseImpl implements MovieService {
                     sort
             );
             Page<MovieProjection> allMovies = movieRepository.getAllMovies(pageable,search);
-            return ResponseEntity.ok(new ApiResponse("status",true,allMovies));
+            return ResponseEntity.ok(new ApiResponse("Succes",true,allMovies));
         }catch (Exception e){
             return ResponseEntity.ok(new ApiResponse("failed",false,null));
         }
@@ -57,7 +55,12 @@ public class MovieServiseImpl implements MovieService {
 
     @Override
     public HttpEntity<?> getMovieById(UUID id) {
-        return null;
+        try{
+            MovieAllDetailProjection movieById = movieRepository.getMovieById(id);
+            return ResponseEntity.ok(new ApiResponse("Succes",true,movieById));
+        }catch (Exception e){
+            return ResponseEntity.ok(new ApiResponse("Failed",false,null));
+        }
     }
 
     @Override
@@ -65,7 +68,12 @@ public class MovieServiseImpl implements MovieService {
         try {
             List<Genre> allGenres = genreRepository.findAllById(movieDto.getGenresIds());
             List<Cast> castList = castRepository.findAllById(movieDto.getCastsIds());
-            Distributor distributor = distributorRepository.getById(movieDto.getDistributorId());
+//            Distributor distributor = distributorRepository.getById(movieDto.getDistributorId());
+            Optional<Distributor> byId = distributorRepository.findById(movieDto.getDistributorId());
+            Distributor distributor = null;
+            if (byId.isPresent()) {
+                 distributor=byId.get();
+            }
             Attachment attachment = new Attachment(file.getOriginalFilename(), file.getContentType(), file.getSize());
         attachmentRepository.save(attachment);
             AttachmentContent attachmentContent = new AttachmentContent(file.getBytes(), attachment);

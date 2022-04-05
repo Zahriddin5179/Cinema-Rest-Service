@@ -19,7 +19,4 @@ public class PriceCategory extends AbsEntity {
     private String name;
     private Double additionalFee;
     private String color;
-
-    @OneToMany(mappedBy = "priceCategory")
-    private List<Seat> seats;
 }

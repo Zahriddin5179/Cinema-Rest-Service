@@ -1,6 +1,5 @@
 package uz.pdp.cinema_room_individual_project.controller;
 
-import com.oracle.webservices.internal.api.databinding.DatabindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

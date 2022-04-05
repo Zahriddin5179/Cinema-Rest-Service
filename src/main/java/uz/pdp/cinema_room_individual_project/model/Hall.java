@@ -18,10 +18,25 @@ import java.util.UUID;
 @Data
 @Entity(name = "halls")
 public class Hall extends AbsEntity {
-    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String name;
     private Integer vipAdditionalFeeInPersent;
 
+    public Hall(String s, int i) {
+        this.name = s;
+        this.vipAdditionalFeeInPersent = i;
+    }
+
+    public Hall(String s) {
+        this.name = s;
+    }
+
+    @Override
+    public String toString() {
+        return "Hall{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", vipAdditionalFeeInPersent=" + vipAdditionalFeeInPersent +
+                '}';
+    }
 }

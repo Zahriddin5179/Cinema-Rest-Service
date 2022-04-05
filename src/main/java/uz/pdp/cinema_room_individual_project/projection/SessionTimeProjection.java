@@ -5,5 +5,6 @@ import java.util.UUID;
 
 public interface SessionTimeProjection {
     UUID getId();
-    String getTime();
+    String getSessionTime();
+    UUID getMovieSessionId();
 }

@@ -26,8 +26,8 @@ public class Movie extends AbsEntity {
     private String trailVideoUrl;
     @OneToOne
     private Attachment posterImg;
-    @Column(nullable = false)
-    private Date releaseDate;
+    @Column(nullable = false,columnDefinition = "date")
+    private LocalDate releaseDate;
     private Double budget;
     private Double distributerShareInPersentage;
     @ManyToOne(cascade = CascadeType.PERSIST)

@@ -7,4 +7,5 @@ import uz.pdp.cinema_room_individual_project.model.User;
 import java.util.UUID;
 @Component
 public interface UserRepository extends JpaRepository<User,UUID> {
+    User findByUsername(String username);
 }

@@ -1,9 +1,6 @@
 package uz.pdp.cinema_room_individual_project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import uz.pdp.cinema_room_individual_project.template.AbsEntity;
 
 import javax.persistence.*;
@@ -14,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "rows")
+@Entity(name = "rowss")
 public class Row extends AbsEntity {
 
     private Integer number;
@@ -22,6 +19,18 @@ public class Row extends AbsEntity {
     @ManyToOne
     private Hall hall;
 
-    @OneToMany(mappedBy = "row")
+    @OneToMany(mappedBy = "row",cascade =CascadeType.ALL)
     private List<Seat> seatList;
+
+    public Row(Integer number, Hall hall) {
+        this.number=number;
+        this.hall=hall;
+    }
+
+    @Override
+    public String toString() {
+        return "Row{" +
+                "number=" + number +
+                '}';
+    }
 }

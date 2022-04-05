@@ -10,7 +10,7 @@ import uz.pdp.cinema_room_individual_project.repository.HallRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-public interface MovieScheduleProjection {
+public interface MovieAnnouncementProjection {
     UUID getId();
     LocalDate getStartDate();
     UUID getMoviePosterImgId();

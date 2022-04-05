@@ -8,6 +8,7 @@ import uz.pdp.cinema_room_individual_project.template.AbsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -15,7 +16,7 @@ import javax.persistence.ManyToOne;
 @Data
 @Entity(name = "carts")
 public class Cart extends AbsEntity {
-    @ManyToOne
+    @OneToOne
     private User user;
 
 }

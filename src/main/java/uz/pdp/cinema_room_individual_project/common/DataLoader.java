@@ -30,6 +30,8 @@ public class DataLoader implements CommandLineRunner {
     CastRepository castRepository;
     @Autowired
     AttachmentContentRepository attachmentContentRepository;
+    @Autowired
+    MovieAnnouncementsRepository movieAnnouncementsRepository;
     @Override
     public void run(String... args) throws Exception {
 //        Attachment attachment = new Attachment("att 1", "file", 5454L);
@@ -54,6 +56,34 @@ public class DataLoader implements CommandLineRunner {
 //        Movie movie = new Movie("Spiderman", "Good", 90, 30000.0, "youtube.com", attachment,
 //                LocalDate.now(), 1000000.0,
 //                50.0, distributor, null, castList);
-//        movieRepository.save(movie);
+//        Movie savedMovie = movieRepository.save(movie);
+//
+//        List<Hall> halls = new ArrayList<>(Arrays.asList(
+//                new Hall("Hall 1"),
+//                new Hall("Hall 2"),
+//                new Hall("Hall 3"),
+//                new Hall("Hall 4"),
+//                new Hall("Hall 5",5)
+//        ));
+//        List<Hall> hallList = hallRepository.saveAll(halls);
+//
+//        Row row111 = new Row(11111, null);
+//
+//        List<Seat> seatList = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            seatList.add(
+//                    new Seat(i + 1, row111, null)
+//            );
+//
+////            seatRepository.save(new Seat(i + 1, savedRow, null));
+//        }
+//
+//        row111.setSeatList(seatList);
+//
+//        Row savedRow = rowRepository.save(row111);
+//        MovieAnnouncement movieAnnouncement = new MovieAnnouncement(savedMovie,true);
+//        MovieAnnouncement savedMOvieAnn = movieAnnouncementsRepository.save(movieAnnouncement);
+//        new MovieSession(hallList.get(0),null,null,null,savedMOvieAnn);
     }
+
     }

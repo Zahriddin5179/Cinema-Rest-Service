@@ -17,14 +17,14 @@ import java.sql.Timestamp;
 @Entity(name = "tickets")
 public class Ticket extends AbsEntity {
     @ManyToOne
-    private MovieSchedule movieSchedule;
+    private MovieSession movieSession;
     @ManyToOne
     private Seat seat;
     @OneToOne
     private Attachment qrCode;
     private Double price;
     @ManyToOne
-    private Cart cart;
+    private User user;
     @Enumerated(EnumType.STRING)
     private TicketStatus ticketStatus;
     private Timestamp createdAt;
